@@ -239,16 +239,6 @@ nav {
 // .main
 //
 
-.posts > .post {
-  padding-bottom: 1em;
-  border-bottom: 1px solid $lightGray;
-}
-
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
-
 .post {
   blockquote {
     margin: 1.2em .8em;
@@ -282,6 +272,8 @@ nav {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: $lightGray;
+  top: 110px;
+  position: relative;
 }
 
 .share-page {
@@ -323,7 +315,7 @@ footer {
 }
 
 #not-header {
-  top: 100px;
+  top: 110px;
   position: relative;
   @include mobile {
     position: static;
@@ -585,3 +577,22 @@ figcaption {
   font-family: "Menlo","DejaVu Sans Mono","Consolas","Ubuntu Mono","Courier New",monospace;
   border-radius: 3px;
 }
+
+.card {
+    overflow: hidden;
+    height: 100%;
+}
+
+.card-img-left {
+    position: absolute;
+    height: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 40%;
+}
+
+.card-img-left ~ .card-body {
+    margin-left: 40%;
+}
+
+

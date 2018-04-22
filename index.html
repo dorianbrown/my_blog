@@ -5,25 +5,21 @@ layout: default
 <div class="posts">
   {% for post in site.posts %}
     <article class="post">
+        <div class = "card"> 
+        <div class="row">
+          <div class="col-md-4" style="flex: 0 0 300px;">
+              <img class="card-img-bottom" src="{{post.picture}}" alt="" title="">
+          </div>
+          <div class="col-md-8">
+              <div class="card-block">
+                  <h4 class="card-title"> {{post.title}} </h4>
+                  <p class="card-text"> {{post.excerpt}} </p>
+                <a href="{{ site.baseurl }}{{ post.url }}" class="btn btn-primary">Read More</a>
+              </div>
+          </div>
+          </div>
+        </div>
       
-      <div class="media">
-       <img class="media-left" width="400" alt="Image" src="{{ post.picture }}">
-       <div class="media-body">
-          <h4 class="card-title">{{ post.title }}</h4>
-          <p class="card-text">{{ post.excerpt }}</p>
-          <a class="btn btn-primary my-3 btn-block" href="/contact/">Contact Us</a>
-       </div>
-    </div>
-
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-      
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">
-        Read More <i class="fas fa-angle-right"></i>
-      </a>
     </article>
   {% endfor %}
 </div>

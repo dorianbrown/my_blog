@@ -5,8 +5,15 @@ layout: default
 <div class="posts">
   {% for post in site.posts %}
     <article class="post">
-
-      <!-- <img src="{{ post.img }}" width="50%"> -->
+      
+      <div class="media">
+       <img class="media-left" width="400" alt="Image" src="{{ post.picture }}">
+       <div class="media-body">
+          <h4 class="card-title">{{ post.title }}</h4>
+          <p class="card-text">{{ post.excerpt }}</p>
+          <a class="btn btn-primary my-3 btn-block" href="/contact/">Contact Us</a>
+       </div>
+    </div>
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 

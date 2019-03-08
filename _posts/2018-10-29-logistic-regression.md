@@ -1,7 +1,6 @@
 ---
 layout: post
 title: A Little Math on Logistic Regression
-date: 20181211
 categories: [Machine Learning, Mathematics]
 picture: /assets/images/logreg/binary-dataset.png
 published: true

@@ -4,25 +4,19 @@ layout: default
 
 <div class="row">
   <div class="col-md-2">
-    <!-- Add conditional (on front page) with personal information (freelance) -->
     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-  </div>
-  <div id="content" class="mx-auto col-lg-8">
-    {{ content }}
-  </div>
-  <div class="col-md-2">
+    {% if page.name == 'index.html' %}
     <div class="sidebar_profile">
       <img src="/assets/images/profile_pic_2.jpg">
       <p>
-      <h3 style="margin: -15px 0 7px 0;">Dorian Brown</h3>      
+      <h3 style="margin: -15px 0 7px 0;">Dorian Brown</h3>
       <p>
-        
+        Stuff here
       </p>
-      <a href="asdf">Read More</a>
+      <a href="/about">Read More</a>
       <p>
         <a href="mailto:mail@dorianbrown.dev">
           <i class="fab far fa-envelope"></i>
-        <a href="mail@dorianbrown.dev">
         </a>
         <a href="https://nl.linkedin.com/in/dorian-brown-141ab74b">
           <i class="fab fa-linkedin"></i>
@@ -30,18 +24,19 @@ layout: default
         <a href="https://www.github.com/dorianbrown">
           <i class="fab fa-github"></i>
         </a>
-        <a href="mail@dorianbrown.dev">
-          <i class="fab fa-stack-overflow"></i>  
+        <a href="https://stackoverflow.com/users/1415371/ballzoffury">
+          <i class="fab fa-stack-overflow"></i>
         </a>
         <a href="https://www.instagram.com/mister_brownalicious/">
           <i class="fab fa-instagram"></i>
         </a>
       </p>
     </div>
-</form>
-</div>
-
-<!--End mc_embed_signup-->
-    </div>
+    {% endif %}
+  </div>
+  <div id="content" class="mx-auto col-md-8">
+    {{ content }}
+  </div>
+  <div class="col-md-1">
   </div>
 </div>

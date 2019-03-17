@@ -745,18 +745,23 @@ code.highlighter-rouge {
   border-bottom-width: 1px;
   border-top-width: 1px;
   border-style: solid;
-  margin-top: 175px;
+  margin-top: 150px;
   text-align: center;
   font-size: 14px;
+  max-width: 150px;
+  float: left;
+  .fab {
+    font-size: 18px;
+  }
   img {
     margin-top: -115px;
     border-radius: 50%;
-    width: 85%;
+    width: 75%;
   }
 }
 
-.sidebar_subscribe {
-  background-color: orange;
-  height: 100px;
-  margin-top: 20px;
+@media (max-width: 990px) {
+  .sidebar_profile {
+    display: none;
+  }
 }

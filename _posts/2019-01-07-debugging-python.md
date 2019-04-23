@@ -4,7 +4,7 @@ title: Better Command Line Debugging with Python
 categories: [Programming]
 picture: /assets/images/pydebug/debug.png
 published: true
-excerpt: How to automatically create an interactive python shell when errors occur in your script
+excerpt: How to automatically create an interactive python shell when errors occur in your script. 
 ---
 
 ## Debugging the Hard Way

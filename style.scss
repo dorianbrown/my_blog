@@ -19,7 +19,7 @@ html {
 
 body {
   background: $white;
-  font-size: 16px;
+  font-size: 1rem;
   color: $darkGray;
   line-height: 1.5em;
 }
@@ -749,6 +749,7 @@ code.highlighter-rouge {
 
 #content {
   max-width: 80ch;
+  line-height: 1.6em;
 }
 
 .sidebar_profile {

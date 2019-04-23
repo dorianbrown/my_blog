@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Better Command Line Debugging with Python
-date: 2019-01-07
 categories: [Programming]
 picture: /assets/images/pydebug/debug.png
 published: true

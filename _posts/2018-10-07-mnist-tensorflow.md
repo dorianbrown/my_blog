@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Understanding Tensorflow with MNIST
-date: 2018-10-07
 categories: [Machine Learning, Programming]
 picture: /assets/images/mnist/ideal_outputs.png
 published: true

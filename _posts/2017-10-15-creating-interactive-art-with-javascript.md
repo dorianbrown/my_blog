@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Creating interactive art with javascript
-date: 2017-10-15 15:16
 author: dsbrown
 comments: true
 categories: [Javascript]

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Understanding Tensorflow with MNIST
-date: 2018-10-07
 categories: [Machine Learning, Programming]
 picture: /assets/images/mnist/ideal_outputs.png
 published: true
@@ -12,7 +11,7 @@ excerpt: During a hackathon at work I finally had tensorflow and it's api "click
 
 Recently at work we had a hackathon on tensorflow, which is something I'd tried (running examples) but never really took the time to play with it. I'd like to share my experiences with the tensorflow computational graph, and some of the flexibility it has to do cool stuff.
 
-> I'm not a tensorflow expert, so please let me know if there are any inaccuracies I need to correct :wink:
+> I'm not a tensorflow expert, so please let me know if there are any inaccuracies I need to correct :grin:
 
 # Quick Introduction to Tensorflow
 

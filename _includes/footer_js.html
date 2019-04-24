@@ -32,3 +32,12 @@
     });
   });
 </script>
+  
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".wrapper-masthead").each(function(){
+    var headroom = new Headroom(this);
+    headroom.init();
+  })
+})
+</script>

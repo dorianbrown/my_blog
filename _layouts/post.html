@@ -34,6 +34,8 @@ layout: columns
     {{ content }}
   </div>
 
+  <hr>
+
   <div class="a2a_kit a2a_kit_size_30 a2a_default_style" style="text-align:right; float:right; margin: 20px 0px;">
   <a class="a2a_button_twitter a2a_counter"></a>
   <a class="a2a_button_linkedin a2a_counter"></a>
@@ -43,7 +45,9 @@ layout: columns
   <a class="a2a_button_facebook a2a_counter"></a>
   </div>
   <script async src="https://static.addtoany.com/menu/page.js"></script>
-
-  {% include staticman.html %}
+  <script>
+    var a2a_config = a2a_config || {};
+    a2a_config.counts = { recover_domain: 'dorianbrown.github.io' };
+  </script>
 
 </article>

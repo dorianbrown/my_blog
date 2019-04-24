@@ -1,0 +1,15 @@
+---
+layout: default
+# This page is used for the main index of galleries
+---
+
+<div class="album-gallery">
+    {% for gallery in page.galleries %}
+    <div class="album">
+      <a href="{{ gallery['link'] }}">
+        <img class="gallery-best-image" src="{{ gallery['link'] }}/thumbs/front_{{ gallery['best_image'] }}">
+        <h2> {{ gallery['title'] }} </h2>
+      </a>
+    </div>
+    {% endfor %}
+</div>

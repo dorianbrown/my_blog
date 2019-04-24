@@ -1,0 +1,31 @@
+---
+layout: default
+# individual pages for each gallery
+header:
+    title: Some Title
+    background-color: "#6B8A78"
+---
+
+<div class="gallery-header">
+    <img src="{{ page.header.image_fullwidth }}">
+    <h1> {{ page.title }} </h1>
+</div>
+<div class="gallery-info-banner">
+    <div class="album-location">
+        <i class="fas fa-globe-europe"></i>
+        {{ site.data.gallery.galleries[page.gallery].location }}
+    </div>
+    <div class="album-date">
+        <i class="far fa-calendar-alt"></i>
+        {{ site.data.gallery.galleries[page.gallery].date }}
+    </div>
+</div>
+
+<section class="photo-gallery forcedgallery">
+    {% for image in page.images %}
+        <a class="single-photo" href="{{ image }}" title="
+        <b> {{ page.exif[image].model }} with {{ page.exif[image].lens }}</b> <br>
+        ISO {{ page.exif[image].iso }} {{ page.exif[image].shutter }} @ f/{{ page.exif[image].fstop }} {{ page.exif[image].focal_length }}mm
+        "><img src="thumbs/{{ image }}" border="0" class="thumb"></a>
+    {% endfor %}
+</section>

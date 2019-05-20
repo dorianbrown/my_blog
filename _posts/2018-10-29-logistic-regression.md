@@ -2,7 +2,7 @@
 layout: post
 title: A Little Math on Logistic Regression
 categories: [Machine Learning, Mathematics]
-picture: /assets/images/logreg/binary-dataset.png
+image: /assets/images/logreg/binary-dataset.png
 published: true
 excerpt: Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I'd like to share some details I've discovered about it over the last year, which helped me better understand how and why it works.
 ---

@@ -3,7 +3,7 @@ layout: post
 title: Exploring Data Version Control (DVC)
 date: 2019-02-22
 categories: [Tooling]
-picture: /assets/images/foo.png
+image: /assets/images/foo.png
 published: false
 excerpt: Bladiebla
 ---

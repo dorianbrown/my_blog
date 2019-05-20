@@ -1,6 +1,7 @@
 # Rquire jekyll to compile the site.
 require "jekyll"
 require "tmpdir"
+require "fileutils"
 
 # Github pages publishing.
 namespace :blog do
@@ -31,6 +32,8 @@ namespace :blog do
     Dir.mktmpdir do |tmp|
       # Copy accross our compiled _site directory.
       cp_r "_site/.", tmp
+      # This ensures we keep the custom domain in github
+      FileUtils.cp "CNAME", tmp
 
       # Switch in to the tmp dir.
       Dir.chdir tmp

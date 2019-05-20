@@ -3,8 +3,7 @@ layout: post
 title: title
 date: 2018-03-20
 categories: [Javascript]
-picture: /assets/images/foo.png
-published: false
+image: /assets/images/foo.png
 excerpt: Bladiebla
 ---
 

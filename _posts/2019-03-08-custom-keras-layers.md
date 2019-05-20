@@ -2,7 +2,7 @@
 layout: post
 title: Creating Custom Keras Layers
 categories: [Machine Learning, Programming]
-picture: /assets/images/foo.png
+image: /assets/images/foo.png
 published: false
 excerpt: Bladiebla
 ---

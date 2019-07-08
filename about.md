@@ -1,21 +1,21 @@
 ---
-title: Hi There
-layout: page
+layout: centered_column
 permalink: /about/
 ---
 
-My name is Dorian Brown, I'm half Dutch half American, and I've been living in the Netherlands near Amsterdam (*Leiden!*) since 2002. I have an MSc in Theoretical Mathematics from Leiden University and am currently working as a data scientist at ING in the Netherlands.
+<div style="text-align: center">
+    <img src="/assets/images/small_profile_pic.jpg" style="border-radius: 50%; width: 200px; margin-top: 20px;">
+    <h1 style="margin: 5px;">Dorian Brown</h1>
+    <h2 style="margin: 5px;">Freelance Data Scientist</h2>
+    <h4 style="margin: 5px 5px 45px 5px;">Amsterdam area, The Netherlands</h4>
+</div>
 
-I started this blog as a creative outlet and reason to work on new ideas. In my current job I get to apply many different machine-learning techniques and teach them to fellow data scientists, and as I enjoy writing I thought this would be a great way to practice both of these skills for a wider audience. For more on this blog you can check out [my first post]({% post_url 2017-10-08-a-short-introduction-and-what-this-blog-is-going-to-be-about %}).
+I'm an applied academic who is always looking to improve the status-quo; a background in mathematics and statistics; years of experience in machine learning, software development, and getting these solutions integrated into the surrounding organisation.
 
-## The Future
+As a field, Data Science is slowly maturing, and similarly companies are becoming more serious about harvesting the value within their data. This is no easy task. You need to choose the right problems to solve, apply the right algorithms to solve these problems, find a clear way to implement these solutions effectively into existing systems, and make the new processes part of your organisation, not just something tacked on to it.
 
-Although currently employed, I'm looking out for a new application of machine learning to eventually start my own company. I sometimes feel that with the technologies currently available, our creativity is the largest constraint in finding business opportunities and ways of making life better.
+Any of these steps can become a bottleneck and, because I’m a mathematician and engineer at heart, I love resolving these kinds of problems.
 
-I also love building tangible products, which people can interact with. I love that Spotify's Radio has introduced me to all kinds of music I never would have listened to otherwise, and it's almost entirely machine learning. I hope to one day create a start-up which offers some kind of service with machine-learning at it's core, to improve people's life in some concrete way.
+I am proficient in Python and most related machine-learning frameworks, CI/CD, version control, automated testing, building web applications with flask and deploying applications with docker. I also have experience in project management positions and coaching junior data scientists.
 
-<img src="/assets/images/twitter_bot.png" style="display:block;margin-left:auto;margin-right:auto;width: 90%;margin-bottom:25px;margin-top:25px;">
-
-## Contact
-
-Feel free to contact me if you have any questions or information that might be interesting! You can use one of the buttons below to find me.
+Feel free to [get in touch](mailto:mail@dorianbrown.dev) if you'd like to know more or are interested in working together.

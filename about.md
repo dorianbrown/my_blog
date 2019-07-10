@@ -14,7 +14,7 @@ I'm an applied academic who is always looking to improve the status-quo; a backg
 
 As a field, Data Science is slowly maturing, and similarly companies are becoming more serious about harvesting the value within their data. This is no easy task. You need to choose the right problems to solve, apply the right algorithms to solve these problems, find a clear way to implement these solutions effectively into existing systems, and make the new processes part of your organisation, not just something tacked on to it.
 
-Any of these steps can become a bottleneck and, because I’m a mathematician and engineer at heart, I love resolving these kinds of problems.
+Any of these steps can become a bottleneck and, although I’m a mathematician and engineer at heart, I love resolving those bottlenecks as that's where the most added value is.
 
 I am proficient in Python and most related machine-learning frameworks, CI/CD, version control, automated testing, building web applications with flask and deploying applications with docker. I also have experience in project management positions and coaching junior data scientists.
 

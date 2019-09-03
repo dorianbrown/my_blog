@@ -44,7 +44,7 @@ h1 {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 h3 {
@@ -195,17 +195,16 @@ nav[data-toggle=toc] .nav-link.active+ul {
   font-size: 16px;
   font-style: italic;
   color: $gray;
-  text-align: right;
+  text-align: left;
 }
 
 // Categories shown below title picture
 .post-categories {
   font-size: 16px;
   color: $gray;
-  margin-top: 10px;
+  margin-top: -25px;
   text-align: right;
   font-style: italic;
-  margin-bottom: -50px;
 }
 
 // Specify the color of the selection
@@ -345,14 +344,14 @@ nav {
 .post {
   blockquote {
     margin: 1.2em .8em;
-    border-left: 2px solid $gray;
+    border-left: 4px solid #bababa;
     padding: 0.1em 1em;
     color: $gray;
-    font-size: 18px;
+    font-size: 16px;
     font-style: italic;
 
     p {
-      margin: 3px 0;
+      margin: 1em 0;
     }
   }
 

@@ -58,7 +58,7 @@ Let's see if we understand the definitions above by first looking at a few examp
 ### Feature Spaces
 
 - *House*: If we're building a model to predict house sale prices, we might take $$\textbf{x}_i = (x_i^1,x_i^2,\dots,x_i^d)$$ where $$x_i^1$$ is the surface area in $$m^2$$, $$x_i^2$$ is the number of years ago the house was built, longitude and latitude, etc. In this case we have "hand-crafted" features, each chosen by the modeler.
-- *Text Document*: For such data, a common feature space is the so called bag-of-words. First we find all $$d$$ unique words over all the documents we have. We then create the vector $$\textbf{x}_i = (x_i^1,x_i^2,\dots,x_i^d)$$ for each document $$i$$, where each element $$x_i^j$$ tells us how often word $$j$$ appears in document $$i$$.
+- *Text Document*: For something like email classification, a common feature space is the so called bag-of-words. First we find all $$d$$ unique words over all the documents we have. We then create the vector $$\textbf{x}_i = (x_i^1,x_i^2,\dots,x_i^d)$$ for each document $$i$$, where each element $$x_i^j$$ tells us how often word $$j$$ appears in document $$i$$.
 
 ## Hypothesis Classes and No Free Lunch
 

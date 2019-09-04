@@ -94,7 +94,7 @@ We'll be using $$L$$ for the loss of a hypothesis $$h$$ given $$D$$, and $$l$$ f
 This is one of the simplest loss functions. What this loss does is count the number of mistakes $$h$$ makes for each training sample. We can state this as:
 
 $$
-l(h) := \frac{1}{n}\sum_{i=1}^n\delta_{h(\textbf{x}_i)\neq y_i}
+L(h) := \frac{1}{n}\sum_{i=1}^n\delta_{h(\textbf{x}_i)\neq y_i}
 $$
 
 where $$\delta$$ is the Dirac delta function
@@ -113,7 +113,7 @@ This isn't used much in practice since it's non-differentiable and non-continuou
 This loss is generally used in regression problems where $$y_i \in \mathbb{R}$$. The loss per training sample is $$(h(\mathbf{x}_i) - y_i)^2$$, which is the distance squared. The overall loss becomes
 
 $$
-l(w):=\frac{1}{n}\sum_{i=1}^n(h(\mathbf{x}_i) - y_i)^2
+L(w):=\frac{1}{n}\sum_{i=1}^n(h(\mathbf{x}_i) - y_i)^2
 $$
 
 The fact that the error is squared means that large errors will be much more punishing than smaller ones, and when searching for $$h \in \mathcal{H}$$ we'll end up choosing one which would rather have lots of small errors rather than a few large ones. 

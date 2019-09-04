@@ -13,7 +13,7 @@ excerpt: This post is the first of a series of posts that serve as an introducti
 
 ## Some Basics
 
-All supervised learning algorithms start with some dataset $$\mathcal{D} = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional vector of inputs, and $$y_i$$ another vector of outputs we call our labels. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
+All supervised learning algorithms start with some dataset $$\mathcal{D} = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
 
 $$
 (\textbf{x}_i,y_i) \sim \mathcal{P}
@@ -145,3 +145,11 @@ $$
 which is the expected loss of our hypothesis, if we take the expectation over all possible input/output pairs drawn from $$\mathcal{P}$$. This is really what we want to minimize, but we can't do this directly since we don't know what $$\mathcal{P}$$ is. 
 
 This is what we're trying to simulate with our validation set $$D_{VA}$$. Since our algorithm has never seen this set, it's as though we're drawing that many new points from our distribution $$\mathcal{P}$$!
+
+## Summary
+
+We defined our dataset $D$ as a set $$\{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$ of data points. Given this dataset, we need to choose a hypothesis space $$\mathcal{H}$$ which we will search through to find a good function $$h \in \mathcal{H}$$ for which $$h(\textbf{x}) \approx y$$ when $$(\textbf{x},y) \sim \mathcal{P}$$. We generally choose $$\mathcal{H}$$ implicitly by our choice of machine learning algorithm. 
+
+Which function $$h$$ is best, is decided by our choice of loss function $L$. This allows us to compare the performance of datasets on some set of data points. 
+
+In order to make sure our algorithm generalizes well after training, we split our dataset into trainging, validation and test. We training on the training set, optimize our algorithm according to the loss on the validation set, and once we're done we use the test set to get a good approximation of how our algorithm will perform in the real world.

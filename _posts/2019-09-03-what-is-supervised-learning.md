@@ -11,7 +11,17 @@ excerpt: This post is the first of a series of posts that serve as an introducti
 >
 > We assume some basic knowledge of linear algebra, probability theory, and optimization theory. I'll try and include links and explanations with the more exotic topics where necessary.
 
-## Some Basics
+## Introduction
+
+The goal in supervised learning is to make predictions from data. We start with an initial dataset for which we know what the outcome should be, and our algorithms try and recognize patterns in the data which are unique for each outcome. For example, one popular application of supervised learning is email spam filtering. Here, an email (the data instance) needs to be classified as spam or not-spam. 
+
+Following the approach of traditional computer science, one might be tempted to write a carefully designed program that follows some rules to decide if an email is spam or not. Although such a program might work reasonably well for a while, it has significant drawbacks. As email spam changes the program would have to be rewritten. Spammers could attempt to reverse engineer the software and design messages that circumvent it. And even if it is successful, it could probably not easily be applied to different languages. 
+
+Machine Learning uses a different approach to generate a program that can make predictions from data. Instead of programming it by hand it is learned from past data. This process works if we have data instances for which we know exactly what the right prediction would have been. For example past data might be user-annotated as spam or not-spam. A machine learning algorithm can utilize such data to learn a program, a classifier, to predict the correct label of each annotated data instance. 
+
+Other successful applications of machine learning include web-search ranking (predict which web-page the user will click on based on his/her search query), placing of online advertisements (predict the expected revenue of an ad, when placed on a homepage, which is seen by a specific user), visual object recognition (predict which object is in an image - e.g. a camera mounted on a self-driving car), face-detection (predict if an image patch contains a human face or not). 
+
+## The Basics
 
 All supervised learning algorithms start with some dataset $$\mathcal{D} = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
 

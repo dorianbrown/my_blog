@@ -49,13 +49,13 @@ We can sum up the goal of supervised machine learning as finding a function $$h$
 
 Let's see if we understand the definitions above by first looking at a few examples of feature spaces and label spaces.
 
-### Label Spaces
+### Label Spaces Examples
 
 - *Binary Classification*: Say we're building a spam filter. Here we have to classes, spam and not spam. The feature space is often $$\{0,1\}$$ or $$\{-1,1\}$$. The choice impacts how we write our loss function, but we'll see more on that later on.
 - *Multi-class Classification*: If we want to build an image classifier, we need to specify which classes we're interested in (e.g. 1=*horse*, 2=*dog*, etc.). If we have $$K$$ image classes, we have $$\mathcal{C}=\{1,2,\dots,K\}$$.
 - *Regression*: If we want to predict the daily temperature, we're predicting a number which could take any value, even if some are highly improbable. In this case $$\mathcal{C} = \mathbb{R}$$.
 
-### Feature Spaces
+### Feature Spaces Examples
 
 - *House*: If we're building a model to predict house sale prices, we might take $$\textbf{x}_i = (x_i^1,x_i^2,\dots,x_i^d)$$ where $$x_i^1$$ is the surface area in $$m^2$$, $$x_i^2$$ is the number of years ago the house was built, longitude and latitude, etc. In this case we have "hand-crafted" features, each chosen by the modeler.
 - *Text Document*: For something like email classification, a common feature space is the so called bag-of-words. First we find all $$d$$ unique words over all the documents we have. We then create the vector $$\textbf{x}_i = (x_i^1,x_i^2,\dots,x_i^d)$$ for each document $$i$$, where each element $$x_i^j$$ tells us how often word $$j$$ appears in document $$i$$.

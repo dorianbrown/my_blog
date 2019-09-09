@@ -5,6 +5,7 @@ date: 2019-09-05
 categories: [Machine Learning, Mathematics]
 image: /assets/images/ml_course/supervised_header.jpg
 excerpt: The k-Nearest Neighbors algorithm is an easy to understand algorithm that can be used for both classification and regression.
+published: false
 ---
 
 > This is the second part of a multi-part series introducing machine learning, with a focus on supervised learning. Check out the first part [here]() if you're getting lost with the terminology or notation.

@@ -23,7 +23,7 @@ Other successful applications of machine learning include web-search ranking (pr
 
 ## The Basics
 
-All supervised learning algorithms start with some dataset $$\mathcal{D} = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
+All supervised learning algorithms start with some dataset $$D = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
 
 $$
 (\textbf{x}_i,y_i) \sim \mathcal{P}
@@ -70,7 +70,6 @@ We need to make this assumption, since this choice has a big impact on how our m
     include image.html 
     url="/assets/images/ml_course/hypothesis_space_impact.png" 
     description="Here we see the impact of choosing our hypothesis space, also known as the bias-variance tradeoff. If our space is too large (picture on right) we get fantastic results on our training set, but horrible generalization. If our space is too small (picture on left), we get bad results on the training set, and bad generalization."
-
 %}
 
 Each machine learning algorithm makes assumptions which restrict its search to a specific space of functions. There's no way around this due to the [No Free Lunch Theorem](https://www.wikiwand.com/en/No_free_lunch_in_search_and_optimization), which you could summarize as "there's no ultimate ML algorithm which is the best on all problems".

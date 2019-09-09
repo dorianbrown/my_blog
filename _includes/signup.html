@@ -1,0 +1,62 @@
+<div>
+  <h3>
+    If you liked this article, subscribe to the mailing list
+  </h3>
+  <form name="myform" id="myform" style="float: left; width: 50%; margin-right: 10px;">
+  <div class="form-group">
+    <input type="email" placeholder="Email Address" name="email" class="form-control" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" required>
+    <input type="hidden" name="status" value="subscribed">
+    <input type="submit" class="btn btn-secondary" id="submitform" value="Subscribe">
+  </div>
+  </form>
+</div>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mailchimp Signup form</title>
+    <meta name="description" content="Mailchimp Signup form using Ajax">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Mailchimp Signup form</h1>
+        <div class="box">
+            <form action="http://hackinout.us15.list-manage.com/subscribe/post-json?u=e44c1f194bec93e238615469e&amp;id=fa63cb4ac7&c=?"
+                method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="lovely-human@example.com" required>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_e44c1f194bec93e238615469e_f6f826e769" tabindex="-1" value="">
+                </div>
+                <input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="mc-button">
+                <div id="subscribe-result">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+  $(document).ready(function () {
+      $("#submitform").click(function (e) {
+          var MyForm = $("#myform").serialize();
+          console.log(MyForm);
+          var response = $.ajax(
+              {
+                  url: "https://us20.api.mailchimp.com/3.0/lists/8acc3cf1bd/members",
+                  username: "username",
+                  password: "95ab0220ef36f4944896334439982069-us20",
+                  type: "POST",
+                  data: MyForm,
+                  success: function(){
+                    console.log("Successfus request to mailchimp")
+                  },
+                  error: function(xhr, error){
+                    console.debug(xhr); console.debug(error);
+                  }
+              });
+          e.preventDefault(); //STOP default action
+      });
+  });
+</script>

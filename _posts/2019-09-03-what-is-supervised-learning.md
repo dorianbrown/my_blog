@@ -29,7 +29,7 @@ Other successful applications of machine learning include web-search ranking (pr
 
 ## The Basics
 
-All supervised learning algorithms start with some dataset $$D = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
+All supervised learning algorithms start with some dataset $$D = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\}$$, where each $$x_i$$ is a d-dimensional input or feature vector, and $$y_i$$ the corresponding output we call our label. We assume that these data points are drawn from some unknown distribution $$\mathcal{P}$$, so
 
 $$
 (\textbf{x}_i,y_i) \sim \mathcal{P}

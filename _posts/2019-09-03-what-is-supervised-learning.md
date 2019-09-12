@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is Supervised Learning?
+title: What is Supervised Learning? A Mathematical Perspective
 date: 2019-09-03
 categories: [Machine Learning, Mathematics]
 image: /assets/images/ml_course/supervised_header.jpg
@@ -132,6 +132,11 @@ This function would perform perfectly on our training data $$D$$, but anything n
 ### Train Test Split
 
 The generally used approach to avoid the above pitfall is to split our dataset $$D$$ into three sets, $$D_{TR}, D_{VA}, D_{TE}$$, which are usually called train, validation and test. A good split might be something like 80/10/10, although this depends on the application and size of $$D$$ among other things.
+
+{% 
+    include image.html 
+    url="/assets/images/ml_course/train_validation_test.png"
+%}
 
 We do this at the very start of our search for $$h$$. When we're trying out all kinds of different algorithms we use the training set to search for our function $$h$$, and our validation set to determine if it's any good. Once we've done this numerous times and are happy with the results, we crack open the test set to see what the final accuracy is.
 

@@ -37,7 +37,7 @@ $$
 
 where we want want our $$(\textbf{x}_i,y_i) $$ to be independent and identically distributed (called iid).
 
-If can formalize this mathematically by saying:
+This can be formalized by saying:
 
 $$
 D = \{(\textbf{x}_1,y_1),\dots,(\textbf{x}_n,y_n)\} \subseteq \mathbb{R}^d \times \mathcal{C}
@@ -57,7 +57,7 @@ Let's see if we understand the definitions above by first looking at a few examp
 
 ### Label Spaces Examples
 
-- *Binary Classification*: Say we're building a spam filter. Here we have to classes, spam and not spam. The feature space is often $$\{0,1\}$$ or $$\{-1,1\}$$. The choice impacts how we write our loss function, but we'll see more on that later on.
+- *Binary Classification*: Say we're building a spam filter. Here we have to classes, spam and not spam. The label space is often $$\{0,1\}$$ or $$\{-1,1\}$$. The choice impacts how we write our loss function, but we'll see more on that later on.
 - *Multi-class Classification*: If we want to build an image classifier, we need to specify which classes we're interested in (e.g. 1=*horse*, 2=*dog*, etc.). If we have $$K$$ image classes, we have $$\mathcal{C}=\{1,2,\dots,K\}$$.
 - *Regression*: If we want to predict the daily temperature, we're predicting a number which could take any value, even if some are highly improbable. In this case $$\mathcal{C} = \mathbb{R}$$.
 

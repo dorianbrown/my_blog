@@ -3,7 +3,7 @@ layout: post
 title: k-Nearest Neighbors and the Curse of Dimensionality
 date: 2019-09-05
 categories: [Machine Learning, Mathematics]
-image: /assets/images/ml_course/supervised_header.jpg
+image: /assets/images/ml_course/knn_header.jpg
 excerpt: The k-Nearest Neighbors algorithm is an easy to understand algorithm that can be used for both classification and regression.
 published: false
 ---
@@ -113,15 +113,17 @@ This is all nice and well, but why should we care? To understand this lets take 
     description="Here we see the impact of choosing our hypothesis space, also known as the bias-variance tradeoff. If our space is too large (picture on right) we get fantastic results on our training set, but horrible generalization. If our space is too small (picture on left), we get bad results on the training set, and bad generalization."
 %}
 
-What this shows is that as the dimension of our space increases, the distances of these points get pushed together. This means that our assumption of "points close together have the same label" doesn't work too well if all the points are equally close together.
+What this shows is that as the dimension of our space increases, the distances of these points get pushed together. This means that our assumption of *"points close together have the same label"* doesn't work too well if all the points are equally close together.
 
-Given the curse of dimensionality, is our k-nearest neighbors algorithm still useful for most real-world datasets? Or are we stuck with only using datasets of only a few features? In most cases there are solutions to this problem, and we'll explain why they work and when they can/should be used.
+Given the curse of dimensionality, is our k-nearest neighbors algorithm still useful for most real-world datasets? Or are we stuck with only using datasets of only a few features? Not all is lost, as we'll explain in the next section.
 
 ## Data in Lower Dimensional Manifolds
 
 In the examples above, we showed that when we randomly sample our data, distances lose their meaning in a sense. The problem there is that are data was sampled in an independent way, and it didn't contain much structure. 
 
-In most machine learning scenarios, our data hopeful contains patterns and structure, which can be viewed as lower-dimensional manifolds within our d-dimensional feature space. See the picture below for a visual explanation.
+In most machine learning scenarios, our data hopeful contains patterns and structure, which can be viewed as lower-dimensional manifolds within our d-dimensional feature space. This is called the [Manifold Hypothesis](https://deepai.org/machine-learning-glossary-and-terms/manifold-hypothesis) in machine learning. Christopher Olah has a [great post](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/) on this in the context of neural networks. If you don't know his blog yet ([colah.github.io](colah.github.io)), definitely check it out.
+
+See the picture below for a visual explanation.
 
 {% 
     include image.html 
@@ -139,5 +141,5 @@ Although we didn't spend much time on this, the problem of finding the k-nearest
 
 The two algorithms which are used in scikit-learn are [K-D Trees](https://en.wikipedia.org/wiki/K-d_tree) and [Ball Trees](https://en.wikipedia.org/wiki/Ball_tree), which both split up the search space into smaller parts, and inform us where to search for neighbors first to speed things up. The linked wikipedia pages give a fairly decent explanation of both algorithms.
 
-Although when creating a machine learning algorithm you'll often not have to worry about these algorithms, there might be other problems where you'll need an algorithm like this. 
+Although when creating a machine learning algorithm you'll often not have to worry about these techniques, there might be other problems where you'll need an algorithm like this. 
 

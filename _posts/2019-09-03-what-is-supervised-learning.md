@@ -51,7 +51,7 @@ where
 - $$y_i$$ is the label or output of the $$i^{th}$$ example
 - $$\mathcal{C}$$ is the space of all possible labels, or label space.
 
-We can sum up the goal of supervised machine learning as finding a function $$h$$, such that for every new input/output pair $$(\textbf{x},y)$$ sampled from $$\mathcal{P}$$ we have $$h(\textbf{x}) \approx y$$. 
+We can sum up the goal of supervised machine learning as finding a function $$h:\mathbb{R}^d \rightarrow \mathcal{C}$$, such that for every new input/output pair $$(\textbf{x},y)$$ sampled from $$\mathcal{P}$$ we have $$h(\textbf{x}) \approx y$$. 
 
 Let's see if we understand the definitions above by first looking at a few examples of feature spaces and label spaces.
 
@@ -68,9 +68,9 @@ Let's see if we understand the definitions above by first looking at a few examp
 
 ## Hypothesis Classes and No Free Lunch
 
-There are some steps we need to take on our path to finding that mysterious function $h$. A very important one is that we need to make some assumptions on what the $h$ looks like, and what space of functions we'll be looking in. This could be linear functions, decision trees, polynomials, or whatever. These are called *hypothesis spaces*, usually denoted with $\mathcal{H}$.
+There are some steps we need to take on our path to finding that mysterious function $h$. A very important one is that we need to make some assumptions on what the $h$ looks like, and what space of functions we'll be looking in. This could be linear functions, decision trees, polynomials, or whatever. These are called *hypothesis spaces*, usually denoted with $\mathcal{H}$. We need to make this assumption, since this choice has a big impact on how our model will generalize to new data points which aren't present in our training data, which is the ultimate goal of machine learning. 
 
-We need to make this assumption, since this choice has a big impact on how our model will generalize to new data points which aren't present in our training data, which is in general what you want to achieve.
+One way of understanding these hypothesis spaces is to look at how expressive they are, or how flexible they are in capturing the structure of a dataset. One of the challenges of machine learning is finding the right balance of flexibility, where not enough causes *underfitting* or *bias*, and too much causes *overfitting* or *variance*. One way of describing this expressiveness is the [Vapnik–Chervonenkis dimension](https://en.wikipedia.org/wiki/Vapnik%E2%80%93Chervonenkis_dimension). 
 
 {% 
     include image.html 

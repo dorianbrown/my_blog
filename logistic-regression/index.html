@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A Little Math on Logistic Regression – Dorian Brown – Finding signal and escaping the noise</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I'd like to share some details I've discovered about it over the last year, which helped me better understand how and why it works." />
+    <meta property="og:description" content="Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I'd like to share some details I've discovered about it over the last year, which helped me better understand how and why it works." />
+    
+    <meta name="author" content="Dorian Brown" />
+
+    
+    <meta property="og:title" content="A Little Math on Logistic Regression" />
+    <meta property="twitter:title" content="A Little Math on Logistic Regression" />
+    
+
+  <!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+      integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<!-- JQuery latest -->
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<!-- Bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+<!-- add after bootstrap.min.js -->
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Dorian Brown - Finding signal and escaping the noise"
+      href="/feed.xml"/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<!--Custom CSS>-->
+<link rel="stylesheet" type="text/css" href="/style.css"/>
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+        type="text/javascript"></script>
+<!-- Photo Gallery -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.js" type="text/javascript"></script>
+<script src="/assets/javascript/jqPhotoSwipe.min.js"></script>
+<!-- Fonts Import -->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+<!-- Mathjax Stuff -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)'], ['$$','$$']]}});
+</script>
+<script type="text/javascript">
+    (function($, window) {
+      var adjustAnchor = function() {
+          var $anchor = $(':target'),
+                  fixedElementHeight = 125;
+          if ($anchor.length > 0) {
+            window.scrollTo(0, $anchor.offset().top - fixedElementHeight);
+          }
+      };
+      $(window).on('hashchange load', function() {
+          adjustAnchor();
+      });
+  })(jQuery, window);
+
+<!-- Hiding header on scroll -->
+</script>
+<script src="/assets/javascript/headroom.min.js"></script>
+
+  
+  <!-- Stub here for jekyll-seo-tag plugin -->
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A Little Math on Logistic Regression | Dorian Brown</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="A Little Math on Logistic Regression" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I’d like to share some details I’ve discovered about it over the last year, which helped me better understand how and why it works." />
+<meta property="og:description" content="Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I’d like to share some details I’ve discovered about it over the last year, which helped me better understand how and why it works." />
+<link rel="canonical" href="https://dorianbrown.dev/logistic-regression/" />
+<meta property="og:url" content="https://dorianbrown.dev/logistic-regression/" />
+<meta property="og:site_name" content="Dorian Brown" />
+<meta property="og:image" content="https://dorianbrown.dev/assets/images/logreg/binary-dataset.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-29T00:00:00+01:00" />
+<script type="application/ld+json">
+{"image":"https://dorianbrown.dev/assets/images/logreg/binary-dataset.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://dorianbrown.dev/logistic-regression/"},"url":"https://dorianbrown.dev/logistic-regression/","headline":"A Little Math on Logistic Regression","dateModified":"2018-10-29T00:00:00+01:00","datePublished":"2018-10-29T00:00:00+01:00","description":"Logistic Regression is one of the first techniques taught in Machine Learning, and for many applications is a good baseline model. Here I’d like to share some details I’ve discovered about it over the last year, which helped me better understand how and why it works.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body data-spy="scroll" data-target="#toc" data-offset="140">
+<div class="wrapper-masthead">
+  <header class="masthead clearfix">
+    <a href="/" class="site-avatar"><img src="/assets/images/logo.png"/></a>
+
+    <div class="site-info">
+      <h1 data-toc-skip class="site-name"><a href="/">Dorian Brown</a></h1>
+      <p class="site-description">Finding signal and escaping the noise</p>
+    </div>
+
+    <nav>
+      <a href="/">Blog</a>
+      <a href="/categories/">Categories</a>
+      <a href="/photography/">Photography</a>
+      <a href="/about">About</a>
+      <button class="btn btn-light" id="subscribe-button">Subscribe</button>
+    </nav>
+  </header>
+</div>
+
+<div id="not-header">
+  <div class="container">
+    <div class="row">
+  <div class="col-lg-2">
+    
+      <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+    
+    
+  </div>
+  <div id="content" class="mx-auto col-lg-8">
+    <article class="post">
+  
+  <figure class="title-figure">
+    <img class="title-img" src="/assets/images/logreg/binary-dataset.png">
+    <div class="title-text"> A Little Math on Logistic Regression </div>
+  </figure>
+  
+
+  <div class="date">
+    October 29, 2018
+  </div>
+
+  <div class="post-categories">
+    <b>Categories: </b>
+    <br>
+    
+    
+    <a href="/categories/#Machine Learning">Machine Learning</a>
+     <br> 
+    
+    <a href="/categories/#Mathematics">Mathematics</a>
+    
+    
+  </div>
+
+  <div class="entry">
+    <h1 id="introduction">Introduction</h1>
+
+<p>One of the most popular techniques for classification is the binary classification method. It’s simplicity, interpretability, and scalability are big advantages. Although more recent methods for classification have gotten a fair amount of attention the logistic regression stays a strong contender for many problems.</p>
+
+<p>I wrote this article because of a training I gave on the subject for some junior data scientists. Although I had worked with it before, I never took the time to understand some of it’s “finer” points. Coming from a mathematics background, I like to understand how things work and why they work. I feel this helps in understanding what the strengths and weaknesses of something are, and how it’s connected to similar mathematical machinery. For those of you who are interested, here are some of the things I discovered.</p>
+
+<p>To keep things simple we’ll be limiting ourselves to the two (e.g. 0 and 1) class problem.</p>
+
+<h1 id="relation-between-thresholds-and-decision-boundaries">Relation between thresholds and decision boundaries</h1>
+
+<p>Most of you probably know that in order to get the binary output we want, we must choose a threshold value. Probabilities below this threshold are set to 0, and above it are set to 1. Visually we can think of it this way:</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/logreg/prob_threshold.png" style="width: 85%;" />
+</figure>
+
+<p>You might wonder, how does that relate to a decision boundary? The decision boundary refers to the hypersurface that splits the feature space into the two output classes. Which side of the boundary a point is determines how it gets classified by the model.</p>
+
+<p>Given a probability threshold, it’s pretty easy to find this boundary with a little linear algebra. Let’s take $t = 1/2$ and see what what the boundary is:</p>
+
+\[\begin{align} P(Y = 1 | X = x) &amp; = \frac{1}{1 + e^{\beta^\intercal x}} = 1/2 \end{align}\]
+
+<p>We can rewrite this as</p>
+
+\[\begin{align}\frac{1}{1 + e^{\beta^\intercal x}} &amp; = \frac{1}{2}
+    \\ 1 + e^{\beta^\intercal x} &amp; = 2 
+    \\ e^{\beta^\intercal x} &amp; = 1
+    \\ \beta^\intercal x &amp; = 0\end{align}\]
+
+<p>So there it is, our boundary for $t=0.5$ is the line $\{x \in \mathbb{R}^n: \beta^{\intercal}x = 0 \}$, which is a hyperplane in $\mathbb{R}^n$. If we include nonlinear functions of our features as additional features, this will add nonlinearities to this decision boundary.</p>
+
+<h1 id="deriving-cross-entropy-from-maximum-likelihood">Deriving Cross-Entropy from Maximum Likelihood</h1>
+
+<p>So now that we’ve defined the model, we also need a function which tells us how well the model fits the data we’re training on. There are lots of loss functions to choose from, so why is the <a href="https://www.wikiwand.com/en/Cross_entropy">cross-entropy</a> usually taken for logistic regression?</p>
+
+<p>The short answer is it’s equivalent to the <a href="https://www.wikiwand.com/en/Maximum_likelihood_estimation">Maximum Likelihood Estimator</a> here, which has all kinds of nice properties. It’s pretty easy to derive the cross-entropy from the MLE, so we’ll show that here. Lets start with the expression of our trustworthy log-likelihood:</p>
+
+\[\begin{align} \log \mathcal{L}(\beta) &amp; = \sum_{i=1}^n\log P_\beta(Y = y_i|X=x_i)
+    \\ &amp; = \sum_{i=1}^n\log P_\beta(Y = 1|X=x_i)^{y_i} + \log P_\beta(Y = 0|X=x_i)^{(1 - y_i)} 
+    \\ &amp; = \sum_{i=1}^n y_i\log \hat{y}_\beta(x_i) + (1 - y_i)\log (1 - \hat{y}_\beta(x_i))  \end{align}\]
+
+<p>which is exactly the cross-entropy loss.</p>
+
+<h1 id="geometric-interpretation-of-l1l2-regularization">Geometric Interpretation of L1/L2 Regularization</h1>
+
+<p>L1/L2 regularization (also known as Ridge/Lasso) is a widely used technique for reducing model overfitting. We restrict the size of the model’s weights, which restricts how complex the model can become. This increases bias, reduces variance, and allows for better generalization on the test set.</p>
+
+<p>In order to regularize our problem, we minimize the original problem:</p>
+
+\[\sum_{i=1}^n L(\beta, x_i) = \sum_{i=1}^n y_i\log \hat{y}_\beta(x) + (1 - y_i)\log (1 - \hat{y}_\beta(x_i))\]
+
+<p>but we add a restriction, namely:</p>
+
+\[\text{arg}\,\text{min}_\beta\sum_{i=1}^n L(\beta, x_i), \quad \text{such that}\, \|\beta\| \lt C\]
+
+<p>for some $C &gt; 0$ which determines how strong we want to regularize. If we use the L2-norm for $\Vert\beta\Vert$ we get Ridge regularization, and with the L1-norm we get Lasso. Smaller values for $C$ correspond with stronger regularization.</p>
+
+<h2 id="feature-selection-with-l1l2-regularization">Feature Selection with L1/L2 regularization</h2>
+
+<p>A key difference between the two kinds of regularization is that lasso “turns-off” features, while ridge only reduces their values. Why this happens has a nice geometric explanation which I took from <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">Elements of Statistical Learning</a>.</p>
+
+<h3 id="ridge">Ridge</h3>
+
+<p>It can be shown for logistic regression with cross-entropy loss that the loss function is convex, with elliptical level sets. The gives the optimization problem shown below when $\beta = (w_1, w_2)$:</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/logreg/l2_regularization.png" style="width: 75%" />
+</figure>
+
+<p>In this picture, you can see that if we’re using the L2-norm, the unit-ball takes the form of a circle. This means that the minimum will be where the black dot is, and this will usually be at a point where $w_1, w_2 &gt; 0$, and as we wanted both fitted weights are smaller than the original one.</p>
+
+<p>To see this happening with a real model, take a look at this graph which plots the value of various weights as we increase the amount of regularization by reducing $\text{df}(\lambda)$.</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/logreg/ridge_coefficients.png" width="75%" />
+</figure>
+
+<h3 id="lasso">Lasso</h3>
+
+<p>Things work a little differently for Lasso regularization with the L1-norm. In this case the unit ball looks like a diamond, which causes the constrained minimum to more often fall on the corners of the diamond. These corners correspond with features being set to zero.</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/logreg/l1_regularization.png" width="75%" />
+</figure>
+
+<p>It’s a bit harder to visualize this picture in higher dimensions, but just like the ridge regression we can plot the weight values against the regularization strength to visualize this “turning-off” of features.</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/logreg/lasso_coefficients.png" width="75%" />
+</figure>
+
+<h2 id="lagrange-duals-and-regularization">Lagrange Duals and Regularization</h2>
+
+<p>The last thing I want to share is a detail on regularization I saw lot’s of authors skip over. Usually regularization is written as this minimization problem, the one with regularization term added to the loss function</p>
+
+\[\text{arg}\,\text{min}_\beta\left(\sum_{i=1}^n L(\beta, x_i) + \lambda \Vert\beta\Vert\right)\]
+
+<p>I wanted to figure out why this was equivalent to</p>
+
+\[\text{arg}\,\text{min}_\beta\sum_{i=1}^n L(\beta, x_i), \quad \text{such that}\, \|\beta\| \lt C.\]
+
+<p>The second is essential to the whole geometric interpretation, while the first is the form used for gradient descent, so I wanted to see this equivalence for myself.</p>
+
+<p>After some research, I found out these two formulations are equivalent due the <a href="https://www.wikiwand.com/en/Duality_(optimization)">strong Lagrangian principle</a>. For the curious, this comes from the field of convex optimization and tells us which conditions are necessary for these two types of problems to be equivalent. For more information on this duality you can check out <a href="https://pdfs.semanticscholar.org/7aa3/9f7f3b69473705e247dd2b3a9689f10fbbc3.pdf">this paper</a> which formally proves this result.</p>
+
+  </div>
+
+  <hr style="margin-top: 3rem;">
+
+  <h3 data-toc-skip>Sharing is caring.</h3>
+  <div class="a2a_kit a2a_kit_size_30 a2a_default_style" style="margin: 0rem 0rem;">
+  <a class="a2a_button_twitter a2a_counter"></a>
+  <a class="a2a_button_linkedin a2a_counter"></a>
+  <a class="a2a_button_hacker_news a2a_counter"></a>
+  <a class="a2a_button_whatsapp a2a_counter"></a>
+  <a class="a2a_button_reddit a2a_counter"></a>
+  <a class="a2a_button_facebook a2a_counter"></a>
+  </div>
+
+  <div class="wrapper">
+  <h3 data-toc-skip> Did you like the article? Subscribe for more.</h3>
+      <form action="https://dev.us20.list-manage.com/subscribe/post-json?u=fb1deb852e0da99410d8eb6b2&amp;id=8acc3cf1bd&c=?"
+          method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+          <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Email Address here" required>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="b_e44c1f194bec93e238615469e_f6f826e769" tabindex="-1" value="">
+          </div>
+          <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-secondary">
+          <div id="subscribe-result">
+          </div>
+      </form>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var $form = $('#mc-embedded-subscribe-form')
+    if ($form.length > 0) {
+      $('form input[type="submit"]').bind('click', function (event) {
+        if (event) event.preventDefault()
+        register($form)
+      })
+    }
+  })
+
+  function register($form) {
+    $('#mc-embedded-subscribe').val('Sending...');
+    $.ajax({
+      type: $form.attr('method'),
+      url: $form.attr('action'),
+      data: $form.serialize(),
+      cache: false,
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8',
+      error: function (err) { alert('Could not connect to the registration server. Please try again later.') },
+      success: function (data) {
+        $('#mc-embedded-subscribe').val('Subscribe')
+        if (data.result === 'success') {
+          // Yeahhhh Success
+          console.log(data.msg)
+          $('#mc-embedded-subscribe').removeClass("btn-secondary").addClass("btn-success");
+          $('#mc-embedded-subscribe').val('Success!')
+          $('#mce-EMAIL').css('borderColor', '#ffffff')
+          $('#subscribe-result').css('color', 'rgb(53, 114, 210)')
+          $('#subscribe-result').html('<p>Thank you for subscribing.</p>')
+          $('#mce-EMAIL').val('')
+        } else {
+          // Something went wrong, do something to notify the user.
+          console.log(data.msg)
+          $('#mce-EMAIL').css('borderColor', '#ff8282')
+          $('#subscribe-result').css('color', '#ff8282')
+          $('#subscribe-result').html('<p>' + data.msg + '</p>')
+        }
+      }
+    })
+  };
+</script>
+
+
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <script>
+    var a2a_config = a2a_config || {};
+    a2a_config.counts = { recover_domain: 'dorianbrown.github.io' };
+  </script>
+
+</article>
+
+  </div>
+</div>
+
+  </div>
+
+  <div class="wrapper-footer">
+    <div class="container">
+      <footer class="footer">
+        <a href="mailto:dorianstuartbrown@gmail.com"><i class="svg-icon email"></i></a>
+<a href="https://github.com/dorianbrown"><i class="svg-icon github"></i></a>
+<a href="https://www.linkedin.com/in/doriansbrown"><i class="svg-icon linkedin"></i></a>
+<a href="http://stackoverflow.com/users/1415371/ballzoffury?tab=profile"><i class="svg-icon stackoverflow"></i></a>
+
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- Lightgallery call -->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(function(){
+
+      $('a').hover(function(e){
+
+          $(this).attr('data-title', $(this).attr('title'));
+          $(this).removeAttr('title');
+
+      },
+      function(e){
+
+          $(this).attr('title', $(this).attr('data-title'));
+
+      });
+    });
+    //By default, plugin uses `data-fancybox-group` attribute to create galleries.
+    $(".fancybox").jqPhotoSwipe({
+      galleryOpen: function (gallery) {
+        //with `gallery` object you can access all methods and properties described here http://photoswipe.com/documentation/api.html
+        //console.log(gallery);
+        //console.log(gallery.currItem);
+        //console.log(gallery.getCurrentIndex());
+        //gallery.zoomTo(1, {x:gallery.viewportSize.x/2,y:gallery.viewportSize.y/2}, 500);
+        gallery.toggleDesktopZoom();
+      }
+    });
+    //This option forces plugin to create a single gallery and ignores `data-fancybox-group` attribute.
+    $(".forcedgallery > a").jqPhotoSwipe({
+      forceSingleGallery: true
+    });
+  });
+</script>
+  
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".wrapper-masthead").each(function(){
+      var headroom = new Headroom(this);
+      headroom.init();
+    })
+  })
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+  });
+</script>
+
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+  function showSubscribeModal() {
+    window.dojoRequire(["mojo/signup-forms/Loader"], 
+      function(L) { 
+        L.start({
+          "baseUrl":"mc.us20.list-manage.com",
+          "uuid":"fb1deb852e0da99410d8eb6b2",
+          "lid":"8acc3cf1bd",
+          "uniqueMethods":true
+      }) 
+      document.cookie = 'MCPopupClosed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+      document.cookie = 'MCPopupSubscribed=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    })
+  }
+
+  $('#subscribe-button').click(showSubscribeModal)
+</script>
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-107934583-2', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/logistic-regression/',
+		  'title': 'A Little Math on Logistic Regression'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+
+</body>
+</html>

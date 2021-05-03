@@ -1,0 +1,112 @@
+I"#<div id="archives">
+
+  <div class="archive-group">
+    
+    <div id="#General"></div>
+    <p></p>
+    
+    <h3 class="category-head">General</h3>
+    <a name="General"></a>
+    
+    <article class="archive-item">
+      <a href="/a-short-introduction-and-what-this-blog-is-going-to-be-about/">A Short Introduction</a>
+    </article>
+    
+  </div>
+
+  <div class="archive-group">
+    
+    <div id="#Programming"></div>
+    <p></p>
+    
+    <h3 class="category-head">Programming</h3>
+    <a name="Programming"></a>
+    
+    <article class="archive-item">
+      <a href="/debugging-python/">Better Command Line Debugging with Python</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/mnist-tensorflow/">Understanding Tensorflow with MNIST</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/befunge/">Rube Goldberg Machine of Coding Languages</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/publishing-blog-posts-to-wordpress-using-rrmarkdown/">Publishing blog posts to Wordpress using RMarkdown</a>
+    </article>
+    
+  </div>
+
+  <div class="archive-group">
+    
+    <div id="#Automation"></div>
+    <p></p>
+    
+    <h3 class="category-head">Automation</h3>
+    <a name="Automation"></a>
+    
+    <article class="archive-item">
+      <a href="/publishing-blog-posts-to-wordpress-using-rrmarkdown/">Publishing blog posts to Wordpress using RMarkdown</a>
+    </article>
+    
+  </div>
+
+  <div class="archive-group">
+    
+    <div id="#Javascript"></div>
+    <p></p>
+    
+    <h3 class="category-head">Javascript</h3>
+    <a name="Javascript"></a>
+    
+    <article class="archive-item">
+      <a href="/dockerized-databases/">Dockerizing databases</a>
+    </article>
+    
+  </div>
+
+  <div class="archive-group">
+    
+    <div id="#Machine Learning"></div>
+    <p></p>
+    
+    <h3 class="category-head">Machine Learning</h3>
+    <a name="Machine Learning"></a>
+    
+    <article class="archive-item">
+      <a href="/what-is-supervised-learning/">What is Supervised Learning? A Mathematical Perspective</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/logistic-regression/">A Little Math on Logistic Regression</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/mnist-tensorflow/">Understanding Tensorflow with MNIST</a>
+    </article>
+    
+  </div>
+
+  <div class="archive-group">
+    
+    <div id="#Mathematics"></div>
+    <p></p>
+    
+    <h3 class="category-head">Mathematics</h3>
+    <a name="Mathematics"></a>
+    
+    <article class="archive-item">
+      <a href="/what-is-supervised-learning/">What is Supervised Learning? A Mathematical Perspective</a>
+    </article>
+    
+    <article class="archive-item">
+      <a href="/logistic-regression/">A Little Math on Logistic Regression</a>
+    </article>
+    
+  </div>
+
+</div>
+:ET

@@ -4,7 +4,7 @@ permalink: /about/
 ---
 
 <div style="text-align: center">
-    <img src="/assets/images/small_profile_pic.jpg" style="border-radius: 50%; width: 200px; margin-top: 20px;">
+    <img src="/assets/images/profile_pic.jpg" style="border-radius: 50%; width: 200px; margin-top: 20px;">
     <h1 style="margin: 5px;">Dorian Brown</h1>
     <h2 style="margin: 5px;">Freelance Data Scientist</h2>
     <h4 style="margin: 5px 5px 45px 5px;">Amsterdam area, The Netherlands</h4>
@@ -16,6 +16,6 @@ As a field, Data Science is slowly maturing, and similarly companies are becomin
 
 Any of these steps can become a bottleneck and, although I’m a mathematician and engineer at heart, I love resolving those bottlenecks as that's where the most added value is.
 
-I am proficient in Python and most related machine-learning frameworks, CI/CD, version control, automated testing, building web applications with flask and deploying applications with docker. I also have experience in project management positions and coaching junior data scientists.
+I am proficient in Python / R, most ML / DL frameworks, CI/CD, version control, automated testing, building web applications with flask and deploying applications with docker. I also have experience in project management positions and coaching junior data scientists.
 
 Feel free to [get in touch](mailto:mail@dorianbrown.dev) if you'd like to know more or are interested in working together.

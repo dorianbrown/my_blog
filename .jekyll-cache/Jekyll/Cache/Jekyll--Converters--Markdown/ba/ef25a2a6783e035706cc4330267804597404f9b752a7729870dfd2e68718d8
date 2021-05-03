@@ -1,0 +1,129 @@
+I"�$<h1 id="opening-remarks">Opening Remarks</h1>
+
+<p>Recently I stumbled onto an article about the well-known <a href="https://www.wikiwand.com/en/Brainfuck">Brainfuck</a> coding language, and I found it fascinating that someone would spend time and energy to create a totally impractical programming language.</p>
+
+<p>To quote the wikipedia page on befunge:</p>
+
+<blockquote>
+  <p>… it is not intended for practical use, but to challenge and amuse programmers.</p>
+</blockquote>
+
+<p>After further reading I found out Brainfuck is what some people call an “esoteric programming language”. Although it was one of the first and most (in)famous, there are many more of these <a href="https://www.wikiwand.com/en/Esoteric_programming_language">wacky creations</a>.</p>
+
+<p>And while browsing through this list of monstrosities, I discovered the beautiful and weird language that is Befunge.</p>
+
+<h1 id="hello-befunge">Hello Befunge</h1>
+
+<p>Let’s get down to how Befunge works. The easiest way to explain how it’s run by an interpreter, is to show a working example. What way is better than a Hello World program:</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/befunge/hello_world1.gif" style="width: 90%;" />
+    <figcaption> The stack is LIFO, so we need to reverse the text </figcaption>
+</figure>
+
+<p>There are a few things to notice here:</p>
+
+<ol>
+  <li>Code is interpreted by the orange cursor, which starts at the top left cell moving to the right. When it moves across a character, something happens.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">"</code> character initiates a string, until the cursor encounters another one. Within a string any characters encountered are put onto a stack, letter by letter. These are used when a print statement is called.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">,</code> character is a kind of print or echo. It removes the first character in the stack, and prints it to the console.</li>
+  <li>Finally the <code class="language-plaintext highlighter-rouge">@</code> character terminates the cursor, and ends the program.</li>
+</ol>
+
+<p>Simple enough right? Now to bend your mind we’ll show you another, more creative, hello world:</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/befunge/hello_world2.gif" style="width: 90%;" />
+    <figcaption> The stack is LIFO, so we need to reverse the text </figcaption>
+</figure>
+
+<p>Try to import that into python! This is the core of befunge’s wackiness. You can actually steer your cursor using certain characters.</p>
+
+<ol>
+  <li>The <code class="language-plaintext highlighter-rouge">&gt;</code>,<code class="language-plaintext highlighter-rouge">v</code>,<code class="language-plaintext highlighter-rouge">&lt;</code>,<code class="language-plaintext highlighter-rouge">^</code> characters can steer the cursor in each of the four possible directions.</li>
+  <li>A random direction can be given by <code class="language-plaintext highlighter-rouge">?</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">|</code> and <code class="language-plaintext highlighter-rouge">_</code> characters pop from the stack, and move the cursor down/right if the popped value was 0, and up/left otherwise.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">p</code> character can change the code of the program. It pops the first 3 values $(x_1,x_2,x_3) = (y,x,v)$ and uses these to set the character at coordinates $(x,y)$ to value $v$.</li>
+</ol>
+
+<p>There are <a href="https://www.wikiwand.com/en/Befunge#/Befunge-93_instruction_list">many more instructions</a> which allow you to manipulate the stack in handy ways, but these are the ones that make Befunge a unique language.</p>
+
+<p>One last thing you might wonder, what happens when the cursor goes off the “grid”? What the creators of the language did, is gave that grid the topology of a torus. This basically means the left wraps to the right, and the top to the bottom. See an example of that here:</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/befunge/torus.gif" style="width: 60%;" />
+    <figcaption> A torus is a donut, in case you forgot. </figcaption>
+</figure>
+
+<h1 id="code-examples">Code Examples</h1>
+
+<p>So with a short introduction to the basics, you can already write some interesting bits of code, which can do some simple things. The fun part about coding in befunge is that you have to get creative to accomplish tasks that would be simple in other languages. Here are some neat examples of befunge, either solving standard coding excercises or showcasing the cool things you can do with the language.</p>
+
+<h2 id="looping-looping">Looping Looping…</h2>
+
+<p>So what about things like loops? Well we can just construct that from the arrows and conditional arrows. The code below contains two loops, the inner loop to print out the string, and the outer loop to fill the stack with the string once it’s empty.</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/befunge/loop.gif" style="width: 90%;" />
+    <figcaption> We don't need loops. We make loops. </figcaption>
+</figure>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">:</code> symbol to double the first character on the stack, since the conditional <code class="language-plaintext highlighter-rouge">_</code> character pops a character when it checks. This way we just pop the character we added with <code class="language-plaintext highlighter-rouge">:</code>, and we still print the full string.</p>
+
+<h2 id="random-number-generator">Random Number Generator</h2>
+
+<p>Another standard example is a random number generator, and in befunge it’s an extra cool one. We use a whole bunch of <code class="language-plaintext highlighter-rouge">?</code>’s to guide the cursor into one of the 9 strategically placed digits.</p>
+
+<p>Since the <code class="language-plaintext highlighter-rouge">?</code> character can send the cursor in any of the 4 directions, we need to be a little careful that we don’t let the cursor escape our construction. If it did escape every now and then, our generator probably wouldn’t be uniformly distributed. But befunge probably won’t be used for much production code. Lets hope.</p>
+
+<figure style="text-align: center;">
+    <img src="/assets/images/befunge/rng.gif" style="width: 90%;" />
+    <figcaption> We don't need loops. We make loops. </figcaption>
+</figure>
+
+<h2 id="examples-from-reddit">Examples from Reddit</h2>
+
+<p>After posting this article <a href="https://www.reddit.com/r/programming/comments/8dz2g6/befunge_the_rube_goldberg_machine_of_coding/">on reddit</a>, I got some really cool examples of programs using befunge. Here’s a list of some of the cool ones:</p>
+
+<ul>
+  <li><a href="http://www.frox25.no-ip.org/%7Emtve/code/eso/bef/chess/">Befunge Chess</a>, a chessboard which is displayed in the “program space” and uses the <code class="language-plaintext highlighter-rouge">p</code> operator to update the chessboard.</li>
+  <li><a href="https://de.wikipedia.org/wiki/Befunge?oldformat=true#BefBef">BefBef</a>, a befunge interpreter which is written in befunge. The “program space” of which is being interpreted is actually a subset of the interpreters “program space”. Really awesome!</li>
+  <li><a href="https://de.wikipedia.org/wiki/Befunge?oldformat=true#Conways_Game_of_Life">Conway’s Game of Life</a>, because a programming language isn’t complete without an implementation of the <a href="https://www.wikiwand.com/en/Conway%27s_Game_of_Life">Game of Life</a>.</li>
+</ul>
+
+<h1 id="try-it-out">Try it out</h1>
+
+<p>Finally I want to include a javascript interpreter, which you can use to try out the language and all the neat things shown above. I used this interpreter to create all the gifs shown in the post, and a larger version with a visible stack can be found on this <a href="http://qiao.github.io/javascript-playground/visual-befunge93-interpreter/">site</a>. Shoutout to Xueqiao Xu for the website and for writing this interpreter in javascript for a really weird language.</p>
+
+<blockquote>
+  <p>Please share any cool programs you make in the comments, and I’ll see if I can update the post with them in the future!</p>
+</blockquote>
+
+<script type="text/javascript" src="/assets/javascript/befunge.js"></script>
+
+<div id="main" style="background-color: rgb(242, 243, 243); padding: 15px; border-radius: 5px; display: flex; flex-wrap: wrap;">
+    <div style="flex: 0 0 65%; text-align: center;">
+        <canvas id="canvas" width="420" height="150" style="padding: 0px 0px 15px 0px;"></canvas>
+        <button id="initbutton">Init</button>
+        <button id="runbutton">Run</button>
+        <button id="stepbutton">Step</button>
+        <button id="stopbutton">Stop</button>
+    </div>
+    <div id="left" style="flex: 0 0 35%; padding: 0px 5px 5px 5px;">
+        <b>Edit the Codes Below</b>
+        <textarea id="codebox"></textarea>
+        <b>Output</b>
+        <textarea id="output" readonly="true"></textarea>
+    </div>
+</div>
+
+<script type="text/javascript">
+    init_func = window.onload
+    window.onload = function() {
+        init_func()
+        codeBox = document.getElementById("codebox");
+        codeBox.value = `"dlroW olleH",,,,,,,,,,,@`
+    }
+</script>
+
+:ET

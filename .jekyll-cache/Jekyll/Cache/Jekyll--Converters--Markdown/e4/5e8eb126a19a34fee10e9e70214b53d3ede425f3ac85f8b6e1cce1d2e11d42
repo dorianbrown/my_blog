@@ -1,0 +1,18 @@
+I"&<ul>
+  <li>
+    <p>Running postgres in a container</p>
+  </li>
+  <li>
+    <p>Connecting to that container</p>
+  </li>
+  <li>
+    <p>Mounting volume seperately</p>
+  </li>
+  <li>
+    <p>Creating a python script to connect to it.</p>
+  </li>
+  <li>
+    <p>Tying it all together</p>
+  </li>
+</ul>
+:ET

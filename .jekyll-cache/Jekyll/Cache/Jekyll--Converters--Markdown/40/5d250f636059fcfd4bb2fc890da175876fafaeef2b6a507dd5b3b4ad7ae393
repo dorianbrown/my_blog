@@ -1,0 +1,47 @@
+I"�<h1 id="easy-posting">Easy posting</h1>
+
+<p>When I was getting this blog setup, I decided I needed to make creating new posts as easy as possible. I want to use my daily commute (which is about 1.5 hours each day) to create new content, and in order to make the barrier as small as possible I started looking into the options for posting from some kind of notebook format.</p>
+
+<p>After a lot of researching the options, looking into the available libraries, trying things out, I arrived at the combination of <strong>Wordpress</strong>, <strong>R Markdown</strong>, and the awesome <strong>RWordpress</strong> library.</p>
+
+<blockquote>
+  <p>For those just interested in the code, the github repository for RWordpress can be found <a href="https://github.com/duncantl/RWordPress">here</a>, and the script I use for posting my articles is on my github <a href="https://github.com/dorianbrown/blog_posts/blob/master/publish_post.R">here</a>.</p>
+</blockquote>
+
+<p>So how can you use RWordpress to make your life easier? To start things off you need to install a few libraries from github.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="monokai"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span><span class="w">
+
+</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"duncantl/XMLRPC"</span><span class="p">)</span><span class="w">
+</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"duncantl/RWordPress"</span><span class="p">)</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"knitr"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">XMLRPC</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">RWordPress</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Next step, write your blog post. I’m sure most of you are familiar with the 
+RMarkdown format, but if not it’s basically a superset of standard markdown, which allows the execution of code within the document (check out the <a href="http://rmarkdown.rstudio.com/&quot;">docs</a>). Once you’ve got your draft ready, you can preview it with the preview/knit button in Rstudio.</p>
+
+<p>So, you’ve finished your post and you’re eager to share it with the world. Running this R script will do the trick:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="monokai"><code><span class="n">pw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">(</span><span class="s2">"../data/wp_password.txt"</span><span class="p">))</span><span class="w">
+</span><span class="n">options</span><span class="p">(</span><span class="n">WordpressLogin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">dsbrown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pw</span><span class="p">),</span><span class="w">
+        </span><span class="n">WordpressURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"http://www.findingsignal.xyz/xmlrpc.php"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">rmd_file</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">args</span><span class="o">$</span><span class="n">file</span><span class="w">
+</span><span class="c1"># Post thumbnail</span><span class="w">
+</span><span class="n">opts_knit</span><span class="o">$</span><span class="n">set</span><span class="p">(</span><span class="n">upload.fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">file</span><span class="p">){</span><span class="n">library</span><span class="p">(</span><span class="n">RWordPress</span><span class="p">);</span><span class="n">uploadFile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">$</span><span class="n">url</span><span class="p">;})</span><span class="w">
+
+</span><span class="n">knit2wp</span><span class="p">(</span><span class="n">rmd_file</span><span class="p">,</span><span class="w"> 
+        </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">args</span><span class="o">$</span><span class="n">title</span><span class="p">,</span><span class="w">
+        </span><span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cat</span><span class="p">,</span><span class="w">
+        </span><span class="n">publish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And just like that, your article is live on Wordpress and visible to all your readers! The script is available <a href="https://github.com/dorianbrown/blog_posts/blob/master/publish_post.R">here</a>, and I hope this will make blogging easier for some of you.</p>
+
+<p>Happy posting!</p>
+:ET

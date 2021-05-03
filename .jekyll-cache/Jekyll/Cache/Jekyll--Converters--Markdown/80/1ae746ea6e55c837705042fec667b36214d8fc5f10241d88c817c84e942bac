@@ -1,0 +1,56 @@
+I"�<h2 id="debugging-the-hard-way">Debugging the Hard Way</h2>
+
+<p>For those of you who are terminal fanatics, and love running their code from the command line, debugging can sometimes be a pain. Often my debugging workflow would have been (when not working in PyCharm), reading the error, finding the file and line number, opening the respective script and adding a <code class="language-plaintext highlighter-rouge">pdb.set_trace</code> statement, and then rerunning the script.</p>
+
+<p>This long process doesn’t just take up some precious time, but it interrupts your mental flow. So maybe there’s a better way…</p>
+
+<h2 id="post-mortem-debugging">Post Mortem Debugging</h2>
+
+<p>This <a href="https://stackoverflow.com/questions/242485/starting-python-debugger-automatically-on-error">stackoverflow discussion</a> gives a great solution to our problem. All you have to do is run your problematic script in the following way:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="monokai"><code>python <span class="nt">-m</span> pdb <span class="nt">-c</span> <span class="k">continue </span>error.py
+</code></pre></div></div>
+
+<p>This will run the <code class="language-plaintext highlighter-rouge">error.py</code> script, and if any errors are encountered it stops and launches an interactive python shell at the moment where the error happens.</p>
+
+<p>Here’s an example of the output:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="monokai"><code>Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">"/home/dorian/miniconda3/lib/python3.7/pdb.py"</span>, line 1697, <span class="k">in </span>main
+    pdb._runscript<span class="o">(</span>mainpyfile<span class="o">)</span>
+  File <span class="s2">"/home/dorian/miniconda3/lib/python3.7/pdb.py"</span>, line 1566, <span class="k">in </span>_runscript
+    self.run<span class="o">(</span>statement<span class="o">)</span>
+  File <span class="s2">"/home/dorian/miniconda3/lib/python3.7/bdb.py"</span>, line 585, <span class="k">in </span>run
+    <span class="nb">exec</span><span class="o">(</span>cmd, globals, locals<span class="o">)</span>
+  File <span class="s2">"&lt;string&gt;"</span>, line 1, <span class="k">in</span> &lt;module&gt;
+  File <span class="s2">"/home/dorian/error.py"</span>, line 3, <span class="k">in</span> &lt;module&gt;
+    def throw_error<span class="o">()</span>:
+  File <span class="s2">"/home/dorian/error.py"</span>, line 5, <span class="k">in </span>throw_error
+    1 + my_list
+TypeError: unsupported operand <span class="nb">type</span><span class="o">(</span>s<span class="o">)</span> <span class="k">for</span> +: <span class="s1">'int'</span> and <span class="s1">'list'</span>
+Uncaught exception. Entering post mortem debugging
+Running <span class="s1">'cont'</span> or <span class="s1">'step'</span> will restart the program
+<span class="o">&gt;</span> /home/dorian/error.py<span class="o">(</span>5<span class="o">)</span>throw_error<span class="o">()</span>
+-&gt; 1 + my_list
+<span class="o">(</span>Pdb<span class="o">)</span> 
+</code></pre></div></div>
+
+<p>This is great! Although we still have to rerun the script, we no longer need to dive into the code and set our breakpoints with <code class="language-plaintext highlighter-rouge">pdb.set_trace</code>.</p>
+
+<h2 id="less-typing-with-bash-aliases">Less typing with bash aliases</h2>
+
+<p>Although using this saves some steps, we still need to remember this pretty verbose command. If you aren’t already familiar with bash aliases, this is as good a time as any to start using them.</p>
+
+<p>All you need to do is add the following line to either your <code class="language-plaintext highlighter-rouge">~/.bashrc</code> or <code class="language-plaintext highlighter-rouge">~/.bash_aliases</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="monokai"><code><span class="nb">alias </span><span class="nv">pydebug</span><span class="o">=</span><span class="s2">"python -m pdb -c continue"</span>
+</code></pre></div></div>
+
+<p>Now instead of typing that whole string of commands, we can just call <code class="language-plaintext highlighter-rouge">pydebug error.py</code> and we get the same debugging magic.</p>
+
+<p>Remember that you need to reload your <code class="language-plaintext highlighter-rouge">.bashrc</code> file before your aliases work. Just run <code class="language-plaintext highlighter-rouge">source .bashrc</code> and you’re ready to go</p>
+
+<h2 id="adding-some-functionality-to-pdb">Adding some functionality to pdb</h2>
+
+<p>Most of you probably don’t work in the basic python shell too much, and I personally am pretty hopeless without intelligent code completion. If you want all these wonderful things in this debugging shell, you’re in luck! You just need to replace <code class="language-plaintext highlighter-rouge">pdb</code> with <code class="language-plaintext highlighter-rouge">ipdb</code> and you get an IPython shell instead of the basic python one. Although <code class="language-plaintext highlighter-rouge">pdb</code> is included with python itself, <code class="language-plaintext highlighter-rouge">ipdb</code> needs to be pip installed.</p>
+:ET
